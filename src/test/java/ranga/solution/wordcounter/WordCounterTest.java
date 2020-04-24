@@ -60,7 +60,7 @@ public class WordCounterTest {
 	}
 	
 	@Test
-	@DisplayName("Negative Test AddWords with an InValid word in a list")
+	@DisplayName("Negative Test call getWordCount without calling addWords")
 	public void testGetWordCountWithoutAddingAWord() {
 
 		assertEquals(0, wc.getWordCount("test"));
