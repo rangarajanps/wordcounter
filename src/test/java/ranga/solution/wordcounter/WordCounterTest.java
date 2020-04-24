@@ -58,6 +58,14 @@ public class WordCounterTest {
 		assertEquals(false, wc.addWords(wordList));
 
 	}
+	
+	@Test
+	@DisplayName("Negative Test AddWords with an InValid word in a list")
+	public void testGetWordCountWithoutAddingAWord() {
+
+		assertEquals(0, wc.getWordCount("test"));
+
+	}
 
 	@Test
 	@DisplayName("Test AddWords with a Valid single word")
@@ -133,6 +141,16 @@ public class WordCounterTest {
 		assertEquals(3, wc.getWordCount("flor"));
 		assertEquals(3, wc.getWordCount("flower"));
 		assertEquals(3, wc.getWordCount("blume"));
+	}
+	
+	@Test
+	@DisplayName("Test getWordCount with Translate where translated words are not added")
+	public void testAddWordTranslateWithoutTranslatedWordAdded() {
+
+		String[] wordList = { "This", "is", "a", "translation", "test", "blume" };
+		assertEquals(true, wc.addWords(wordList));
+		assertEquals(1, wc.getWordCount("blume"));
+		
 	}
 
 	@Test
