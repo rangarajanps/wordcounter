@@ -105,9 +105,12 @@ public class WordCounter {
 
 			// call translate API and check if translated word is present in the Map or not
 			// if present, add the count of the translated word
-			String wordToCheck = Translator.translate(entry.getKey());
-			if (wordToCheck.equalsIgnoreCase(translatedInput) && wcMap.containsKey(wordToCheck)
-					&& (!entry.getKey().equalsIgnoreCase(wordToCheck))) {
+			
+			String translatedWordToCheck = Translator.translate(entry.getKey());
+			if ( translatedWordToCheck.equalsIgnoreCase(translatedInput) && 
+					wcMap.containsKey(translatedWordToCheck) && 
+					( ! entry.getKey().equalsIgnoreCase(translatedWordToCheck)) ) {
+				
 				count += wcMap.get(input);
 			}
 		}
