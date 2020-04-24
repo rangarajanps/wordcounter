@@ -17,21 +17,45 @@ public class WordCounterTest {
 	public void testAddSingleValidWord() {
 
 		String[] wordList = { "Test" };
-		assertEquals(true, wc.addWord(wordList));
+		assertEquals(true, wc.addWords(wordList));
 	}
 
 	@Test
 	public void testAddValidWords() {
 
 		String[] wordList = { "This", "is", "a", "test" };
-		assertEquals(true, wc.addWord(wordList));
+		assertEquals(true, wc.addWords(wordList));
 	}
 
 	@Test
 	public void testAddSingleInvalidWord() {
 
 		String[] wordList = { "Test!" };
-		assertEquals(false, wc.addWord(wordList));
+		assertEquals(false, wc.addWords(wordList));
+
+	}
+	
+	@Test
+	public void testAddSingleInvalidInputNull() {
+
+		String[] wordList = null;
+		assertEquals(false, wc.addWords(wordList));
+
+	}
+	
+	@Test
+	public void testAddSingleInvalidInputEmpty() {
+
+		String[] wordList = { };
+		assertEquals(false, wc.addWords(wordList));
+
+	}
+	
+	@Test
+	public void testAddSingleInvalidInputEmpty2() {
+
+		String[] wordList = {"" };
+		assertEquals(false, wc.addWords(wordList));
 
 	}
 
@@ -39,32 +63,52 @@ public class WordCounterTest {
 	public void testAddSingleInvalidWordInAList() {
 
 		String[] wordList = { "This", "is:", "a", "test" };
-		assertEquals(false, wc.addWord(wordList));
+		assertEquals(false, wc.addWords(wordList));
 
 	}
 
 	@Test
 	public void testAddWordCount() {
 		String[] wordList = { "Test" };
-		assertEquals(true, wc.addWord(wordList));
+		assertEquals(true, wc.addWords(wordList));
 		assertEquals(1, wc.getWordCount("Test"));
 	}
 
 	@Test
 	public void testAddWordCountWithMultipleAdd() {
 		String[] wordList = { "Test" };
-		assertEquals(true, wc.addWord(wordList));
-		assertEquals(true, wc.addWord(wordList));
+		assertEquals(true, wc.addWords(wordList));
+		assertEquals(true, wc.addWords(wordList));
 		assertEquals(2, wc.getWordCount("Test"));
-		assertEquals(true, wc.addWord(wordList));
+		assertEquals(true, wc.addWords(wordList));
 		assertEquals(3, wc.getWordCount("Test"));
+	}
+	
+	@Test
+	public void testAddWordsWithThousandWords() {
+		String[] wordList = { "This", "is", "a", "test","with","testing","for","a","large","dataset" };
+		for (int i=0;i<100;i++) {
+			assertEquals(true, wc.addWords(wordList));
+		}
+		
+		assertEquals(200, wc.getWordCount("a"));
+	}
+	
+	@Test
+	public void testAddWordsWithMillionWords() {
+		String[] wordList = { "This", "is", "a", "test","with","testing","for","a","large","dataset" };
+		for (int i=0;i<100000;i++) {
+			assertEquals(true, wc.addWords(wordList));
+		}
+		
+		assertEquals(200000, wc.getWordCount("a"));
 	}
 
 	@Test
 	public void testAddWordTranslate() {
 
 		String[] wordList = { "This", "is", "a", "translation", "test", "flower", "flor", "blume" };
-		assertEquals(true, wc.addWord(wordList));
+		assertEquals(true, wc.addWords(wordList));
 		assertEquals(3, wc.getWordCount("flor"));
 		assertEquals(3, wc.getWordCount("flower"));
 		assertEquals(3, wc.getWordCount("blume"));
@@ -83,7 +127,7 @@ public class WordCounterTest {
 				@Override
 				public void run() {
 					try {
-						wc.addWord(wordList);
+						wc.addWords(wordList);
 						Thread.sleep(random.nextInt(10));
 					} catch (InterruptedException ignored) {
 					}

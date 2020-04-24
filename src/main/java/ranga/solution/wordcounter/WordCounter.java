@@ -19,7 +19,11 @@ public class WordCounter {
 	 * @return boolean This returns true for successful operation and false even if
 	 *         one word is not added
 	 */
-	public boolean addWord(String[] strList) {
+	public boolean addWords(String[] strList) {
+		
+		if (strList == null || strList.length == 0 ) {
+			return false;
+		}
 
 		boolean status = true;
 		for (String word : strList) {
@@ -62,6 +66,10 @@ public class WordCounter {
 	 *         alpha-numeric
 	 */
 	private boolean validateWord(String word) {
+		
+		if ( word == null || word.length() == 0 ) {
+			return false;
+		}
 
 		List<Character> result = word.chars().mapToObj(c -> (char) c)
 				.filter(chr -> Character.isLetterOrDigit(chr))
